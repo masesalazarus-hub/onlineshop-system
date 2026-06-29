@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Products</h2>
+
+<div class="search-box">
+
+    <form method="GET">
+
+        <input
+            type="text"
+            name="q"
+            value="{{ request.GET.q }}"
+            placeholder="Search products...">
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</div>
+
+<div class="row">
+    <a href="?category={{ category.id }}&q={{ request.GET.q }}"></a>
+
+<a href="/products/">
+All
+</a>
+
+{% for category in categories %}
+
+<a href="?category={{ category.id }}">
+{{ category.name }}
+</a>
+
+{% endfor %}
+
+</div>
+
+{% for product in products %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card h-100 shadow">
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}"
+                 class="card-img-top"
+                 style="height:250px; object-fit:cover;">
+        {% endif %}
+
+        <div class="card-body">
+
+            <h5>
+    <a href="{% url 'product_detail' product.id %}">
+        {{ product.name }}
+    </a>
+</h5>
+
+            <p class="card-text">
+                {{ product.description }}
+            </p>
+
+            <h4 class="text-success">
+                TZS {{ product.price }}
+            </h4>
+
+            {% if product.stock > 0 %}
+
+<span class="in-stock">
+In Stock: {{ product.stock }}
+</span>
+
+{% else %}
+
+<span class="out-stock">
+Out Of Stock
+</span>
+
+{% endif %}
+
+            <a href="{% url 'add_to_cart' product.id %}"
+               class="btn btn-primary">
+
+                Add To Cart
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Orders</title>
+
+<link rel="stylesheet"
+href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<h1>My Orders</h1>
+
+<table border="1" width="100%">
+
+<tr>
+<th>ID</th>
+<th>Total</th>
+<th>Status</th>
+<th>Date</th>
+</tr>
+
+{% for order in orders %}
+
+<tr>
+<td>{{ order.id }}</td>
+<td>{{ order.total_amount }}</td>
+<td>
+
+{% if order.status == 'Pending' %}
+
+<span class="status pending">
+Pending
+</span>
+
+{% elif order.status == 'Processing' %}
+
+<span class="status processing">
+Processing
+</span>
+
+{% else %}
+
+<span class="status delivered">
+Delivered
+</span>
+
+{% endif %}
+
+</td>
+<td>{{ order.created_at }}</td>
+<td>
+    <a href="{% url 'payment' order.id %}">
+        Pay
+    </a>
+</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Online Shopping System Statistics</p>
+</div>
+
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h2>{{ products }}</h2>
+        <p>Total Products</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ orders }}</h2>
+        <p>Total Orders</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ customers }}</h2>
+        <p>Total Customers</p>
+    </div>
+    <div class="stat-card">
+    <h2>{{ revenue }}</h2>
+    <p>Total Revenue (TZS)</p>
+</div>
+
+<div class="best-products">
+
+<h2>Best Selling Products</h2>
+
+<table class="custom-table">
+
+<tr>
+    <th>Product</th>
+    <th>Sold</th>
+</tr>
+
+{% for item in best_products %}
+
+<tr>
+    <td>{{ item.product__name }}</td>
+    <td>{{ item.total_sold }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+<div class="chart-card">
+
+<h2>Sales Overview</h2>
+
+<canvas id="salesChart"></canvas>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('salesChart');
+
+new Chart(ctx, {
+    type: 'bar',
+
+    data: {
+
+        labels: [
+            'Products',
+            'Orders',
+            'Customers'
+        ],
+
+        datasets: [{
+            data: [
+                {{ products }},
+                {{ orders }},
+                {{ customers }}
+            ]
+        }]
+    }
+});
+
+</script>
+</div>
+
+{% endblock %}

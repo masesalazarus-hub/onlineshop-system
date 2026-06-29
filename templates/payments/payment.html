@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment</title>
+</head>
+
+<body>
+
+<h1>Payment</h1>
+
+<h3>Total: TZS {{ order.total_amount }}</h3>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<select name="method">
+
+<option value="Cash">Cash</option>
+
+<option value="M-Pesa">M-Pesa</option>
+
+<option value="Tigo Pesa">Tigo Pesa</option>
+
+<option value="Airtel Money">Airtel Money</option>
+
+<option value="Bank">Bank</option>
+
+</select>
+
+<button type="submit">
+Pay Now
+</button>
+
+</form>
+
+</body>
+</html>

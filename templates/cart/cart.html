@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Cart</title>
+
+<link rel="stylesheet"
+href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Shopping Cart</h1>
+
+<table border="1" width="100%">
+
+<tr>
+    <td>{{ item.product.name }}</td>
+    <td>{{ item.product.price }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.product.price }}</td>
+</tr>
+
+{% for item in items %}
+
+<tr>
+    <td>{{ item.product.name }}</td>
+
+    <td>{{ item.product.price }}</td>
+
+    <td>
+
+        <a href="{% url 'decrease_quantity' item.id %}"
+           class="qty-btn">
+           -
+        </a>
+
+        <span class="qty-value">
+            {{ item.quantity }}
+        </span>
+
+        <a href="{% url 'increase_quantity' item.id %}"
+           class="qty-btn">
+           +
+        </a>
+
+    </td>
+
+    <td>
+        <a href="{% url 'remove_item' item.id %}"
+           class="remove-btn">
+           Remove
+        </a>
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h2>
+Grand Total: TZS {{ total }}
+</h2>
+<a href="{% url 'checkout' %}">
+    <button>
+        Checkout
+    </button>
+</a>
+
+</div>
+
+</body>
+</html>
