@@ -1,40 +1,118 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Payment</title>
-</head>
+{% block content %}
 
-<body>
+<div class="payment-container">
 
-<h1>Payment</h1>
+    <div class="payment-card">
 
-<h3>Total: TZS {{ order.total_amount }}</h3>
+        <h2>💳 Payment</h2>
 
-<form method="POST">
+        <p class="payment-text">
+            Complete your payment to confirm your order.
+        </p>
 
-{% csrf_token %}
+        <div class="payment-summary">
 
-<select name="method">
+            <div class="summary-row">
+                <span><strong>Total Amount</strong></span>
+                <strong>TZS {{ order.total_amount }}</strong>
+            </div>
 
-<option value="Cash">Cash</option>
+        </div>
 
-<option value="M-Pesa">M-Pesa</option>
+        <form method="POST">
 
-<option value="Tigo Pesa">Tigo Pesa</option>
+            {% csrf_token %}
 
-<option value="Airtel Money">Airtel Money</option>
+           <h4 class="method-title">Choose Payment Method</h4>
 
-<option value="Bank">Bank</option>
+<h4 class="method-title">Choose Payment Method</h4>
 
-</select>
+<div class="payment-methods">
 
-<button type="submit">
-Pay Now
-</button>
+    <!-- M-Pesa -->
+    <label class="method-card">
+        <input type="radio" name="method" value="M-Pesa" required>
 
-</form>
+        <div class="method-content">
+            <img src="{% static 'images/payment/mpesa.png' %}" class="payment-logo">
 
-</body>
-</html>
+            <div>
+                <h5>M-Pesa</h5>
+                <p>Vodacom Tanzania</p>
+            </div>
+        </div>
+    </label>
+
+    <!-- Airtel -->
+    <label class="method-card">
+        <input type="radio" name="method" value="Airtel Money">
+
+        <div class="method-content">
+            <img src="{% static 'images/payment/airtel-money.png' %}" class="payment-logo">
+
+            <div>
+                <h5>Airtel Money</h5>
+                <p>Airtel Tanzania</p>
+            </div>
+        </div>
+    </label>
+
+    <!-- Mixx -->
+    <label class="method-card">
+        <input type="radio" name="method" value="Mixx">
+
+        <div class="method-content">
+            <img src="{% static 'images/payment/mixx.png' %}" class="payment-logo">
+
+            <div>
+                <h5>Mixx by Yas</h5>
+                <p>Formerly Tigo Pesa</p>
+            </div>
+        </div>
+    </label>
+
+    <!-- CRDB -->
+    <label class="method-card">
+        <input type="radio" name="method" value="CRDB">
+
+        <div class="method-content">
+            <img src="{% static 'images/payment/crdb.png' %}" class="payment-logo">
+
+            <div>
+                <h5>CRDB Bank</h5>
+                <p>Bank Transfer</p>
+            </div>
+        </div>
+    </label>
+
+    <!-- NMB -->
+    <label class="method-card">
+        <input type="radio" name="method" value="NMB">
+
+        <div class="method-content">
+            <img src="{% static 'images/payment/nmb.png' %}" class="payment-logo">
+
+            <div>
+                <h5>NMB Bank</h5>
+                <p>Bank Transfer</p>
+            </div>
+        </div>
+    </label>
+
+    <!-- Cash -->
+    <label class="method-card">
+        <input type="radio" name="method" value="Cash">
+
+        <div class="method-content">
+            <img src="{% static 'images/payment/cash.png' %}" class="payment-logo">
+
+            <div>
+                <h5>Cash On Delivery</h5>
+                <p>Pay after receiving the order</p>
+            </div>
+        </div>
+    </label>
+
+</div>

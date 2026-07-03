@@ -8,12 +8,15 @@ from django.shortcuts import render
 @login_required
 def checkout(request):
 
-    cart_items = Cart.objects.filter(
-        user=request.user
-    )
+    cart_items = Cart.objects.filter(user=request.user)
 
     if not cart_items:
         return redirect('cart')
+
+    # Hakikisha stock inatosha
+    for item in cart_items:
+        if item.quantity > item.product.stock:
+            return redirect('cart')
 
     total = 0
 
@@ -34,11 +37,13 @@ def checkout(request):
             price=item.product.price
         )
 
-    cart_items.delete()
-    item.product.stock -= item.quantity
-    item.product.save()
+        # Punguza stock
+        item.product.stock -= item.quantity
+        item.product.save()
 
-    return redirect('my_orders')
+    cart_items.delete()
+
+    return redirect('payment', order.id)
 
 @login_required
 def my_orders(request):

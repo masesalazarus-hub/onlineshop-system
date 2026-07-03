@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<h2 class="mb-4">Products</h2>
+<div class="products-header">
 
-<div class="search-box">
+    <h2>Our Products</h2>
 
-    <form method="GET">
+    <form method="GET" class="search-form">
 
         <input
             type="text"
             name="q"
-            value="{{ request.GET.q }}"
-            placeholder="Search products...">
+            placeholder="Search products..."
+            value="{{ request.GET.q }}">
 
         <button type="submit">
             Search
@@ -22,77 +22,82 @@
 
 </div>
 
-<div class="row">
-    <a href="?category={{ category.id }}&q={{ request.GET.q }}"></a>
+<div class="category-filter">
 
-<a href="/products/">
-All
-</a>
+    <a href="/products/" class="category-btn">
+        All
+    </a>
 
-{% for category in categories %}
+    {% for category in categories %}
 
-<a href="?category={{ category.id }}">
-{{ category.name }}
-</a>
+    <a href="?category={{ category.id }}"
+       class="category-btn">
 
-{% endfor %}
+        {{ category.name }}
+
+    </a>
+
+    {% endfor %}
 
 </div>
 
+<div class="products-grid">
+
 {% for product in products %}
 
-<div class="col-md-4 mb-4">
+<div class="product-card">
 
-    <div class="card h-100 shadow">
+    {% if product.image %}
+        <img src="{{ product.image.url }}">
+    {% else %}
+        <img src="https://via.placeholder.com/300x220?text=No+Image">
+    {% endif %}
 
-        {% if product.image %}
-            <img src="{{ product.image.url }}"
-                 class="card-img-top"
-                 style="height:250px; object-fit:cover;">
+    <div class="product-info">
+
+        <h3>{{ product.name }}</h3>
+
+        <p>{{ product.description|truncatewords:15 }}</p>
+
+        <h4>TZS {{ product.price }}</h4>
+
+        {% if product.stock > 0 %}
+            <span class="stock in-stock">
+                In Stock ({{ product.stock }})
+            </span>
+        {% else %}
+            <span class="stock out-stock">
+                Out of Stock
+            </span>
         {% endif %}
 
-        <div class="card-body">
+        <div class="product-buttons">
 
-            <h5>
-    <a href="{% url 'product_detail' product.id %}">
-        {{ product.name }}
-    </a>
-</h5>
+            <a href="{% url 'product_detail' product.id %}"
+               class="view-btn">
 
-            <p class="card-text">
-                {{ product.description }}
-            </p>
+                View
 
-            <h4 class="text-success">
-                TZS {{ product.price }}
-            </h4>
+            </a>
 
             {% if product.stock > 0 %}
-
-<span class="in-stock">
-In Stock: {{ product.stock }}
-</span>
-
-{% else %}
-
-<span class="out-stock">
-Out Of Stock
-</span>
-
-{% endif %}
-
             <a href="{% url 'add_to_cart' product.id %}"
-               class="btn btn-primary">
+               class="cart-btn">
 
                 Add To Cart
 
             </a>
+            {% endif %}
 
         </div>
 
     </div>
 
 </div>
+
+{% empty %}
+
+<h3>No products found.</h3>
 
 {% endfor %}
 

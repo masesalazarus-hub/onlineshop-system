@@ -5,8 +5,7 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>ShopSmart</title>
 
@@ -19,146 +18,150 @@
 
 <body>
 
-    <!-- NAVBAR -->
+<nav class="navbar custom-navbar">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
 
-        <div class="container">
+<button
+class="menu-btn"
+type="button"
+data-bs-toggle="offcanvas"
+data-bs-target="#sidebar">
 
-            <a class="navbar-brand fw-bold" href="/">
-                ShopSmart
-            </a>
+☰
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
+</button>
 
-                <span class="navbar-toggler-icon"></span>
+<a class="navbar-brand" href="/">
+🛒 ShopSmart
+</a>
 
-            </button>
+<form class="search-navbar"
+method="GET"
+action="/products/">
 
-            <div class="collapse navbar-collapse"
-                 id="navbarNav">
+<input
+type="search"
+name="q"
+placeholder="Search products...">
 
-                <ul class="navbar-nav ms-auto align-items-center">
+<button>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            Home
-                        </a>
-                    </li>
+Search
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products/">
-                            Products
-                        </a>
-                    </li>
+</button>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/">
-                            Dashboard
-                        </a>
-                    </li>
+</form>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/reports/">
-                            Reports
-                        </a>
-                    </li>
+</div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about/">
-                            About
-                        </a>
-                    </li>
+</nav>
+<div class="offcanvas offcanvas-start"
+tabindex="-1"
+id="sidebar">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact/">
-                            Contact
-                        </a>
-                    </li>
+<div class="offcanvas-header">
 
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-warning"
-                           href="/cart/">
-                            Cart
-                        </a>
-                    </li>
+<h4>ShopSmart</h4>
 
-                    {% if user.is_authenticated %}
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="offcanvas">
+</button>
 
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-success"
-                           href="/profile/">
-                            Profile
-                        </a>
-                    </li>
+</div>
 
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-danger"
-                           href="/logout/">
-                            Logout
-                        </a>
-                    </li>
+<div class="offcanvas-body">
 
-                    {% else %}
+<a href="/">🏠 Home</a>
 
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-primary"
-                           href="/login/">
-                            Login
-                        </a>
-                    </li>
+<a href="/products/">📦 Products</a>
 
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-success"
-                           href="/register/">
-                            Register
-                        </a>
-                    </li>
+<a href="/cart/">🛒 Cart</a>
 
-                    {% endif %}
+<a href="/contact/">📞 Contact</a>
 
-                </ul>
+<a href="/about/">ℹ About</a>
 
-            </div>
+{% if user.is_authenticated %}
 
-        </div>
+<hr>
 
-    </nav>
+<p class="menu-title">
 
-    <!-- MAIN CONTENT -->
+Account
 
-    <main class="container mt-4 mb-5">
+</p>
 
-        {% block content %}
-        {% endblock %}
+<a href="/profile/">👤 Profile</a>
 
-    </main>
+<a href="/my-orders/">📋 My Orders</a>
 
-    <!-- FOOTER -->
+<a href="/dashboard/">📊 Dashboard</a>
 
-    <footer class="footer">
+<a href="/reports/">📈 Reports</a>
 
-        <div class="container">
+<a href="/logout/" class="logout-link">
 
-            <h3>ShopSmart</h3>
+🚪 Logout
 
-            <p>
-                Online Shopping Database System
-            </p>
+</a>
 
-            <p>
-                © 2026 All Rights Reserved
-            </p>
+{% else %}
 
-        </div>
+<hr>
 
-    </footer>
+<a href="/login/">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+Login
+
+</a>
+
+<a href="/register/">
+
+Register
+
+</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="container page-content">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>ShopSmart</h3>
+
+<p>
+
+Online Shopping Database System
+
+</p>
+
+<p>
+
+© 2026 All Rights Reserved
+
+</p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

@@ -1,22 +1,62 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<div class="text-center py-5">
+<section class="hero">
 
-    <h1 class="display-3 fw-bold">
-        Welcome To ShopSmart
-    </h1>
+    <div class="hero-content">
 
-    <p class="lead">
-        Buy products easily, securely and quickly from anywhere.
+        <h1>Welcome to ShopSmart</h1>
+
+        <p>
+            Shop Electronics, Fashion, Shoes, Books and Accessories
+            at the best prices.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/products/" class="btn-shop">Shop Now</a>
+            <a href="/about/" class="btn-learn">Learn More</a>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-card">
+        <div class="icon">🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Quick delivery across Tanzania.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">💳</div>
+        <h3>Secure Payment</h3>
+        <p>Safe payment methods.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">🛍️</div>
+        <h3>Quality Products</h3>
+        <p>Original products with warranty.</p>
+    </div>
+
+</section>
+
+<section class="home-banner">
+
+    <h2>Special Offer</h2>
+
+    <p>
+        Get up to 30% discount on selected products.
     </p>
 
-    <a href="{% url 'products' %}"
-       class="btn btn-primary btn-lg">
-        Shop Now
+    <a href="/products/" class="btn-shop">
+        Shop Today
     </a>
 
-</div>
+</section>
 
 {% endblock %}
