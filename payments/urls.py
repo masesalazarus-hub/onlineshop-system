@@ -14,5 +14,9 @@ urlpatterns = [
         views.receipt,
         name='receipt'
     ),
-
+path(
+    'send-whatsapp/<int:order_id>/',
+    views.send_whatsapp,
+    name='send_whatsapp'
+),
 ]

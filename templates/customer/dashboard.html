@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>👋 Welcome, {{ request.user.first_name|default:request.user.username }}</h2>
+    <p>Manage your orders and account here.</p>
+
+    <div class="row mt-4">
+
+        <!-- Total Orders -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5>Total Orders</h5>
+                    <h2>{{ total_orders }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Payments -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5>Total Payments</h5>
+                    <h2>{{ total_payments }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Spent -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5>Total Spent</h5>
+                    <h2>TZS {{ total_spent }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+            <h4>Recent Orders</h4>
+        </div>
+
+        <div class="card-body">
+
+            {% if recent_orders %}
+
+            <table class="table table-striped table-hover">
+
+                <thead>
+
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for order in recent_orders %}
+
+                    <tr>
+
+                        <td>#{{ order.id }}</td>
+
+                        <td>TZS {{ order.total_amount }}</td>
+
+                        <td>
+
+                            {% if order.status == 'Pending' %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Pending
+                                </span>
+
+                            {% elif order.status == 'Processing' %}
+
+                                <span class="badge bg-primary">
+                                    Processing
+                                </span>
+
+                            {% elif order.status == 'Delivered' %}
+
+                                <span class="badge bg-success">
+                                    Delivered
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ order.created_at|date:"d M Y" }}</td>
+
+                        <td>
+
+                            <a href="{% url 'receipt' order.id %}"
+                               class="btn btn-sm btn-outline-primary">
+
+                                👁 View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+                <div class="alert alert-info">
+                    You don't have any orders yet.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+            <h4>Quick Actions</h4>
+        </div>
+
+        <div class="card-body">
+
+            <a href="{% url 'home' %}" class="btn btn-primary me-2">
+                🛍 Continue Shopping
+            </a>
+
+            <a href="{% url 'logout' %}" class="btn btn-danger">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -19,6 +19,14 @@
 <p>Date: {{ payment.payment_date }}</p>
 
 <p>Status: {{ order.status }}</p>
+<div class="text-center mt-5">
+
+    <a href="{% url 'send_whatsapp' order.id %}" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        Send Payment Confirmation
+    </a>
+
+</div>
 
 </body>
 </html>

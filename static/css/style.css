@@ -1588,3 +1588,71 @@ color:#666;
     align-items:center;
     gap:20px;
 }
+.whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:16px 35px;
+    background:#25D366;
+    color:#fff;
+    text-decoration:none;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(37,211,102,.35);
+    transition:.3s ease;
+}
+
+.whatsapp-btn:hover{
+    background:#1EBE5D;
+    transform:translateY(-3px);
+    color:#fff;
+    box-shadow:0 12px 25px rgba(37,211,102,.45);
+}
+
+.whatsapp-btn i{
+    font-size:28px;
+}
+/* ==========================
+   CUSTOMER DASHBOARD
+========================== */
+
+.dashboard-header{
+    background: linear-gradient(135deg,#0d6efd,#4f46e5);
+    color:#fff;
+    padding:30px;
+    border-radius:15px;
+    margin-bottom:30px;
+}
+
+.dashboard-card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-5px);
+}
+
+.dashboard-icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.status-pending{
+    color:#ffc107;
+    font-weight:bold;
+}
+
+.status-processing{
+    color:#0d6efd;
+    font-weight:bold;
+}
+
+.status-delivered{
+    color:#198754;
+    font-weight:bold;
+}
