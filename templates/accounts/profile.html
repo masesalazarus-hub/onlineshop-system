@@ -2,26 +2,118 @@
 
 {% block content %}
 
-<div class="profile-card">
+<div class="container mt-5">
 
-    <h1>My Profile</h1>
+    <div class="card shadow-lg border-0">
 
-    <div class="profile-info">
+        <div class="card-body text-center">
 
-        <p>
-            <strong>Username:</strong>
-            {{ request.user.username }}
-        </p>
+            <!-- Profile Picture -->
+            <img src="https://ui-avatars.com/api/?name={{ request.user.username }}&background=0D6EFD&color=fff&size=150"
+                 class="rounded-circle mb-3"
+                 width="150"
+                 height="150">
 
-        <p>
-            <strong>Email:</strong>
-            {{ request.user.email }}
-        </p>
+            <h2>{{ request.user.get_full_name|default:request.user.username }}</h2>
 
-        <p>
-            <strong>Date Joined:</strong>
-            {{ request.user.date_joined }}
-        </p>
+            <p class="text-muted">
+                {{ request.user.email }}
+            </p>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h6>Username</h6>
+                    <p>{{ request.user.username }}</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h6>Email</h6>
+                    <p>{{ request.user.email }}</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h6>Member Since</h6>
+                    <p>{{ request.user.date_joined|date:"d M Y" }}</p>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row mt-4">
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-primary text-white shadow">
+
+                        <div class="card-body">
+
+                            <h5>📦 Orders</h5>
+
+                            <h2>{{ total_orders }}</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-success text-white shadow">
+
+                        <div class="card-body">
+
+                            <h5>💳 Payments</h5>
+
+                            <h2>{{ total_payments }}</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-dark text-white shadow">
+
+                        <div class="card-body">
+
+                            <h5>💰 Total Spent</h5>
+
+                            <h4>TZS {{ total_spent }}</h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <a href="{% url 'customer_dashboard' %}"
+                   class="btn btn-primary me-2">
+
+                    📊 My Dashboard
+
+                </a>
+
+                <a href="/logout/"
+                   class="btn btn-danger">
+
+                    🚪 Logout
+
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 

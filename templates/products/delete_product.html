@@ -1,0 +1,50 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h3>
+
+Delete Product
+
+</h3>
+
+<p>
+
+Are you sure you want to delete
+
+<strong>
+
+{{ product.name }}
+
+</strong> ?
+
+</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<button class="btn btn-danger">
+
+Yes Delete
+
+</button>
+
+<a href="{% url 'admin_products' %}"
+class="btn btn-secondary">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

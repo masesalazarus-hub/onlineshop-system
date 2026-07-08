@@ -13,8 +13,9 @@
           rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -48,9 +49,7 @@ name="q"
 placeholder="Search products...">
 
 <button>
-
 Search
-
 </button>
 
 </form>
@@ -58,6 +57,9 @@ Search
 </div>
 
 </nav>
+
+<!-- Sidebar -->
+
 <div class="offcanvas offcanvas-start"
 tabindex="-1"
 id="sidebar">
@@ -91,23 +93,27 @@ data-bs-dismiss="offcanvas">
 <hr>
 
 <p class="menu-title">
-
 Account
-
 </p>
 
-<a href="/profile/">👤 Profile</a>
+<a href="/profile/">
+👤 My Profile
+</a>
 
-<a href="/my-orders/">📋 My Orders</a>
+<a href="{% url 'customer_dashboard' %}">
+📊 My Dashboard
+</a>
 
-<a href="/dashboard/">📊 Dashboard</a>
+<a href="/my-orders/">
+📦 My Orders
+</a>
 
-<a href="/reports/">📈 Reports</a>
+<a href="/reports/">
+📈 Reports
+</a>
 
 <a href="/logout/" class="logout-link">
-
 🚪 Logout
-
 </a>
 
 {% else %}
@@ -115,15 +121,11 @@ Account
 <hr>
 
 <a href="/login/">
-
-Login
-
+🔑 Login
 </a>
 
 <a href="/register/">
-
-Register
-
+📝 Register
 </a>
 
 {% endif %}
@@ -149,15 +151,11 @@ Register
 <h3>ShopSmart</h3>
 
 <p>
-
 Online Shopping Database System
-
 </p>
 
 <p>
-
 © 2026 All Rights Reserved
-
 </p>
 
 </footer>

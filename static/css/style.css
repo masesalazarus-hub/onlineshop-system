@@ -1656,3 +1656,61 @@ color:#666;
     color:#198754;
     font-weight:bold;
 }
+/* ===== ADMIN PANEL ===== */
+
+body{
+    background:#f4f6f9;
+}
+
+.btn-dark{
+
+    background:#20232a;
+    border:none;
+    transition:.3s;
+}
+
+.btn-dark:hover{
+
+    background:#0d6efd;
+}
+
+.stat-card{
+
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+}
+
+.dashboard-header{
+
+    margin-bottom:30px;
+}
+
+.custom-table{
+
+    width:100%;
+    background:white;
+}
+
+.chart-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-top:30px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}

@@ -1,0 +1,29 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+
+<form method="POST"
+enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="btn btn-success">
+
+Save Product
+
+</button>
+
+<a href="{% url 'admin_products' %}"
+class="btn btn-secondary">
+
+Cancel
+
+</a>
+
+</form>
+
+{% endblock %}

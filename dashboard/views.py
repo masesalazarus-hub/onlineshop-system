@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from orders.models import OrderItem
@@ -7,8 +8,11 @@ from orders.models import Order
 from payments.models import Payment
 from django.http import HttpResponse
 import openpyxl
-
-
+from django.contrib.auth.decorators import login_required, user_passes_test
+def admin_required(user):
+    return user.is_superuser
+@login_required
+@user_passes_test(admin_required)
 def dashboard(request):
 
     total_products = Product.objects.count()
@@ -36,6 +40,8 @@ def dashboard(request):
             'best_products': best_products,
         }
     )
+@login_required
+@user_passes_test(admin_required)
 def reports(request):
 
     orders = Order.objects.all().order_by('-id')
@@ -47,6 +53,8 @@ def reports(request):
             'orders': orders
         }
     )
+@login_required
+@user_passes_test(admin_required)
 def export_excel(request):
 
     workbook = openpyxl.Workbook()
@@ -85,3 +93,65 @@ def export_excel(request):
     workbook.save(response)
 
     return response
+@login_required
+@user_passes_test(admin_required)
+def manage_orders(request):
+
+    orders = (
+        Order.objects
+        .select_related('customer')
+        .order_by('-created_at')
+    )
+
+    return render(
+        request,
+        'dashboard/manage_orders.html',
+        {
+            'orders': orders
+        }
+    )
+
+@login_required
+@user_passes_test(admin_required)
+def update_order_status(request, order_id, status):
+
+    order = get_object_or_404(
+        Order,
+        id=order_id
+    )
+
+    if status in [
+        'Pending',
+        'Processing',
+        'Delivered'
+    ]:
+        order.status = status
+        order.save()
+
+    return redirect('manage_orders')
+@login_required
+@user_passes_test(admin_required)
+def order_details(request, order_id):
+
+    order = get_object_or_404(
+        Order,
+        id=order_id
+    )
+
+    items = OrderItem.objects.filter(
+        order=order
+    )
+
+    payment = Payment.objects.filter(
+        order=order
+    ).first()
+
+    return render(
+        request,
+        'dashboard/order_details.html',
+        {
+            'order': order,
+            'items': items,
+            'payment': payment,
+        }
+    )
