@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ez3*jb6)p!g3t7_k2jalujmj1vem5xsuk0pl-$!i#z9p2zs=ez
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "masesa.pythonanywhere.com",
+    "onlineshop-system.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
